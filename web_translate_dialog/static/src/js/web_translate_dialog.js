@@ -23,6 +23,7 @@ var Mutex = concurrency.Mutex;
 var TranslateDialog = Dialog.extend({
     template: "TranslateDialog",
     init: function(parent, options) {
+        this._open_dialog_wait_for = []
         var title_string = _t("Translate fields: /");
         var field_names;
         var single_field = false;
@@ -50,6 +51,7 @@ var TranslateDialog = Dialog.extend({
         );
         this.lang_data.set_sort(['tr_sequence asc','id asc']);
         this.lang_data.read_slice(['code', 'name']).then(this.on_languages_loaded);
+        this._open_dialog_wait_for.push(this.languages_loaded)
     },
     willStart: function () {
         var self = this;
@@ -62,7 +64,8 @@ var TranslateDialog = Dialog.extend({
     get_translatable_fields: function(parent) {
         var field_list = [];
         _.each(parent.renderer.state.fields, function(field, name){
-            if (field.translate == true){
+            var related_readonly = typeof field.related !== 'undefined' && field.readonly;
+            if (field.translate == true && !related_readonly && parent.renderer.state.getFieldNames().includes(name)){
                 field_list.push(name);
             }
         });
@@ -74,7 +77,7 @@ var TranslateDialog = Dialog.extend({
     },
     open: function() {
         // the template needs the languages
-        return $.when(this.languages_loaded).then($.proxy(this._super, this));
+        return $.when.apply($, this._open_dialog_wait_for).then($.proxy(this._super, this));
     },
     start: function() {
         var self = this;
@@ -222,6 +225,9 @@ var TranslateDialog = Dialog.extend({
                 return done;
             });
         });
+        save_mutex.exec(function() {
+            self.view.reload();
+        });
         this.close();
     },
     on_button_close: function() {
@@ -247,7 +253,7 @@ FormController.include({
     on_button_translate: function() {
         var self = this;
         $.when(this.has_been_loaded).then(function() {
-            self.open_translate_dialog(null, self.initialState.res_id);
+            self.open_translate_dialog(null, self.getSelectedIds()[0]);
         });
     },
 

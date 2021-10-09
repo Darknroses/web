@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 11.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2020-02-12 17:13+0000\n"
+"PO-Revision-Date: 2020-11-08 09:16+0000\n"
 "Last-Translator: Hans Henrik Gabelgaard <hhg@gabelgaard.org>\n"
 "Language-Team: none\n"
 "Language: da\n"
@@ -24,6 +24,16 @@ msgid "#menu_id=#{app.menuID}&action_id=#{app.actionID}"
 msgstr ""
 
 #. module: web_responsive
+#. openerp-web
+#: code:addons/web_responsive/static/src/xml/menu.xml:37
+#: code:addons/web_responsive/static/src/xml/menu.xml:40
+#: code:addons/web_responsive/static/src/xml/menu.xml:49
+#: code:addons/web_responsive/static/src/xml/menu.xml:52
+#, python-format
+msgid "Alt"
+msgstr ""
+
+#. module: web_responsive
 #: model:ir.model.fields,field_description:web_responsive.field_res_users__chatter_position
 msgid "Chatter Position"
 msgstr "Log position"
@@ -34,6 +44,14 @@ msgstr "Log position"
 #, python-format
 msgid "Close"
 msgstr "Luk"
+
+#. module: web_responsive
+#. openerp-web
+#: code:addons/web_responsive/static/src/xml/menu.xml:40
+#: code:addons/web_responsive/static/src/xml/menu.xml:52
+#, python-format
+msgid "Control"
+msgstr ""
 
 #. module: web_responsive
 #. openerp-web
@@ -49,7 +67,7 @@ msgstr "Opret"
 #: code:addons/web_responsive/static/src/xml/form_view.xml:110
 #, python-format
 msgid "Discard"
-msgstr "Kasser"
+msgstr "Kassér"
 
 #. module: web_responsive
 #. openerp-web
@@ -97,11 +115,20 @@ msgstr "Gem"
 #: code:addons/web_responsive/static/src/xml/apps.xml:35
 #, python-format
 msgid "Search menus..."
-msgstr "Søh menu..."
+msgstr "Søg menu..."
 
 #. module: web_responsive
 #. openerp-web
-#: code:addons/web_responsive/static/src/xml/menu.xml:6
+#: code:addons/web_responsive/static/src/xml/menu.xml:35
+#, python-format
+msgid "Select menu"
+msgstr ""
+
+#. module: web_responsive
+#. openerp-web
+#: code:addons/web_responsive/static/src/xml/menu.xml:29
+#: code:addons/web_responsive/static/src/xml/menu.xml:37
+#: code:addons/web_responsive/static/src/xml/menu.xml:49
 #, python-format
 msgid "Shift"
 msgstr ""
@@ -110,6 +137,13 @@ msgstr ""
 #: selection:res.users,chatter_position:0
 msgid "Sided"
 msgstr "Side"
+
+#. module: web_responsive
+#. openerp-web
+#: code:addons/web_responsive/static/src/xml/menu.xml:47
+#, python-format
+msgid "User menu"
+msgstr ""
 
 #. module: web_responsive
 #: model:ir.model,name:web_responsive.model_res_users
