@@ -31,6 +31,7 @@ addon | version | maintainers | summary
 [web_boolean_button](web_boolean_button/) | 13.0.1.0.0 |  | Boolean Button Widget for Forms with legend
 [web_calendar_slot_duration](web_calendar_slot_duration/) | 13.0.1.0.0 | [![Yajo](https://github.com/Yajo.png?size=30px)](https://github.com/Yajo) | Customizable calendar slot durations
 [web_company_color](web_company_color/) | 13.0.1.1.0 |  | Web Company Color
+[web_confirm_duplicate](web_confirm_duplicate/) | 13.0.1.0.1 | [![LoisRForgeFlow](https://github.com/LoisRForgeFlow.png?size=30px)](https://github.com/LoisRForgeFlow) | Adds a confirmation dialog when duplicating a record.
 [web_decimal_numpad_dot](web_decimal_numpad_dot/) | 13.0.1.0.0 |  | Allows using numpad dot to enter period decimal separator
 [web_dialog_size](web_dialog_size/) | 13.0.1.0.2 |  | A module that lets the user expand a dialog box to the full screen width.
 [web_disable_export_group](web_disable_export_group/) | 13.0.2.1.0 |  | Web Disable Export Group
@@ -48,14 +49,14 @@ addon | version | maintainers | summary
 [web_notify](web_notify/) | 13.0.1.0.2 |  | Send notification messages to user
 [web_pivot_computed_measure](web_pivot_computed_measure/) | 13.0.1.1.0 |  | Web Pivot Computed Measure
 [web_pwa_oca](web_pwa_oca/) | 13.0.1.0.2 | [![eLBati](https://github.com/eLBati.png?size=30px)](https://github.com/eLBati) | Make Odoo a PWA
-[web_refresher](web_refresher/) | 13.0.2.0.0 |  | Web Refresher
-[web_responsive](web_responsive/) | 13.0.2.8.0 | [![Yajo](https://github.com/Yajo.png?size=30px)](https://github.com/Yajo) [![Tardo](https://github.com/Tardo.png?size=30px)](https://github.com/Tardo) | Responsive web client, community-supported
+[web_refresher](web_refresher/) | 13.0.2.0.1 |  | Web Refresher
+[web_responsive](web_responsive/) | 13.0.2.8.1 | [![Yajo](https://github.com/Yajo.png?size=30px)](https://github.com/Yajo) [![Tardo](https://github.com/Tardo.png?size=30px)](https://github.com/Tardo) | Responsive web client, community-supported
 [web_search_with_and](web_search_with_and/) | 13.0.1.0.0 |  | Use AND conditions on omnibar search
 [web_send_message_popup](web_send_message_popup/) | 13.0.1.0.0 |  | Web Send Message as Popup
 [web_set_single_page_hidden](web_set_single_page_hidden/) | 13.0.1.0.0 |  | Set single_page_hidden to false in Pager widget options
 [web_sheet_full_width](web_sheet_full_width/) | 13.0.1.0.0 |  | Use the whole available screen width when displaying sheets
 [web_time_range_menu_custom](web_time_range_menu_custom/) | 13.0.1.0.1 |  | Web Time Range Menu Custom
-[web_timeline](web_timeline/) | 13.0.1.1.1 | [![tarteo](https://github.com/tarteo.png?size=30px)](https://github.com/tarteo) | Interactive visualization chart to show events in time
+[web_timeline](web_timeline/) | 13.0.1.1.2 | [![tarteo](https://github.com/tarteo.png?size=30px)](https://github.com/tarteo) | Interactive visualization chart to show events in time
 [web_translate_dialog](web_translate_dialog/) | 13.0.1.1.0 |  | Easy-to-use pop-up to translate fields in several languages
 [web_tree_dynamic_colored_field](web_tree_dynamic_colored_field/) | 13.0.1.0.0 |  | Allows you to dynamically color fields on tree views
 [web_tree_image_tooltip](web_tree_image_tooltip/) | 13.0.1.0.0 |  | Show images in tree views via tooltip
@@ -70,10 +71,10 @@ addon | version | maintainers | summary
 [web_widget_many2one_simple](web_widget_many2one_simple/) | 13.0.1.0.0 | [![Tardo](https://github.com/Tardo.png?size=30px)](https://github.com/Tardo) | Simple many2one widget
 [web_widget_mpld3_chart](web_widget_mpld3_chart/) | 13.0.1.0.0 |  | This widget allows to display charts using MPLD3 library.
 [web_widget_numeric_step](web_widget_numeric_step/) | 13.0.1.1.0 |  | Web Widget Numeric Step
-[web_widget_one2many_product_picker](web_widget_one2many_product_picker/) | 13.0.2.0.1 |  | Widget to select products on one2many fields
+[web_widget_one2many_product_picker](web_widget_one2many_product_picker/) | 13.0.2.0.2 |  | Widget to select products on one2many fields
 [web_widget_one2many_product_picker_sale_secondary_unit](web_widget_one2many_product_picker_sale_secondary_unit/) | 13.0.1.0.0 |  | Adds support for sale secondary unit in the one2many product picker widget
 [web_widget_one2many_product_picker_sale_stock](web_widget_one2many_product_picker_sale_stock/) | 13.0.1.0.0 |  | Adds support for stock in the one2many product picker widget
-[web_widget_one2many_tree_line_duplicate](web_widget_one2many_tree_line_duplicate/) | 13.0.1.0.1 |  | Web Widget One2many Tree Line Duplicate
+[web_widget_one2many_tree_line_duplicate](web_widget_one2many_tree_line_duplicate/) | 13.0.1.0.2 |  | Web Widget One2many Tree Line Duplicate
 [web_widget_open_tab](web_widget_open_tab/) | 13.0.1.0.0 |  | Allow to open record from trees on new tab from tree views
 [web_widget_text_markdown](web_widget_text_markdown/) | 13.0.1.0.0 |  | Widget to text fields that adds markdown support
 [web_widget_url_advanced](web_widget_url_advanced/) | 13.0.1.1.1 |  | This module extends URL widget for displaying anchors with custom labels.
