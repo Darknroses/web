@@ -13,41 +13,48 @@ on:
 jobs:
   sync:
     runs-on: ubuntu-latest
-    env:
-      PAT_TOKEN: ${{ secrets.Fork_Sync_Automation }}
     steps:
       - name: Checkout fork
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          # Use your PAT here so all subsequent git commands use it automatically
+          token: ${{ secrets.Fork_Sync_Automation }}
 
-      - name: Add upstream
+      - name: Set Upstream Variable
         run: |
-          git remote add upstream https://github.com/${{ github.event.inputs.upstream_repo }}.git || true
-          git fetch upstream --prune '+refs/heads/*:refs/remotes/upstream/*'
+          # If triggered by dispatch, use input. If by schedule, use default.
+          UPSTREAM_REPO="${{ github.event.inputs.upstream_repo }}"
+          if [ -z "$UPSTREAM_REPO" ]; then
+            UPSTREAM_REPO="OCA/web"
+          fi
+          echo "UPSTREAM_REPO=$UPSTREAM_REPO" >> $GITHUB_ENV
 
       - name: Sync all branches
         run: |
-          # Optional: skip old workflow branches
+          # Configure Git Identity
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          # Add upstream
+          git remote add upstream https://github.com/${{ env.UPSTREAM_REPO }}.git
+          git fetch upstream --prune '+refs/heads/*:refs/remotes/upstream/*'
+
           SKIP_BRANCHES="11.0 12.0 13.0 14.0 15.0 16.0 17.0 18.0"
 
-          for branch in $(git for-each-ref --format='%(refname:short)' refs/remotes/upstream/ | grep -E '^upstream/' | sed 's|^upstream/||'); do
-            echo "Processing branch: $branch"
-
-            # Skip old workflow branches
+          for branch in $(git for-each-ref --format='%(refname:short)' refs/remotes/upstream/ | sed 's|^upstream/||'); do
+            # Skip if branch is in the skip list
             if echo "$SKIP_BRANCHES" | grep -wq "$branch"; then
-              echo "Skipping old workflow branch $branch"
+              echo "Skipping old workflow branch: $branch"
               continue
             fi
 
-            # Create or update branch
-            if git show-ref --verify --quiet refs/heads/$branch; then
-              git checkout $branch
-              git merge --ff-only upstream/$branch || true
-            else
-              git checkout -B $branch upstream/$branch
-            fi
+            echo "Processing branch: $branch"
+            
+            # Checkout the branch (create it if it doesn't exist locally)
+            git checkout -B "$branch" "upstream/$branch"
 
-            # Push branch using PAT
-            git push https://$PAT_TOKEN@github.com/${{ github.repository }}.git $branch --set-upstream --force-with-lease
+            # Push to origin (your fork)
+            # Since we used the PAT in the checkout step, we don't need to embed it in the URL
+            git push origin "$branch" --force-with-lease
           done
