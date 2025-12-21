@@ -51,12 +51,3 @@ jobs:
             # Push branch using PAT
             git push https://$PAT_TOKEN@github.com/${{ github.repository }}.git $branch --set-upstream --force-with-lease
           done
-
-      - name: Push changes
-        env:
-          PAT_TOKEN: ${{ secrets.Fork_Sync_Automation }}
-        run: |
-          for branch in $(git branch | sed 's/\* //'); do
-            echo "Pushing branch $branch"
-            git push https://$PAT_TOKEN@github.com/${{ github.repository }}.git $branch --set-upstream --force-with-lease
-          done
