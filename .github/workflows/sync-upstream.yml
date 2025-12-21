@@ -58,5 +58,5 @@ jobs:
         run: |
           for branch in $(git branch | sed 's/\* //'); do
             echo "Pushing branch $branch"
-            git push https://$PAT_TOKEN@github.com/Darknroses/web.git $branch --set-upstream --force-with-lease
+            git push https://$PAT_TOKEN@github.com/${{ github.repository }}.git $branch --set-upstream --force-with-lease
           done
