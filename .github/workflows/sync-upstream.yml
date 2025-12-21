@@ -16,10 +16,13 @@ jobs:
     steps:
       - name: Checkout fork
         uses: actions/checkout@v4
+        env:
+          PAT_TOKEN: ${{ secrets.Fork_Sync_Automation }}
         with:
           fetch-depth: 0
-          # Use your PAT here so all subsequent git commands use it automatically
-          token: ${{ secrets.Fork_Sync_Automation }}
+          # If the PAT is missing, this will now show a clearer error or fallback
+          token: ${{ secrets.Fork_Sync_Automation || github.token }}
+
 
       - name: Set Upstream Variable
         run: |
