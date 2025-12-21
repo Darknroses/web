@@ -45,6 +45,9 @@ jobs:
 
 
 
-
       - name: Push changes
-        run: git push origin --all --force-with-lease
+        run: |
+          for branch in $(git branch | sed 's/\* //'); do
+            echo "Pushing branch $branch"
+            git push https://$PAT_TOKEN@github.com/<your-username>/<repo>.git $branch --set-upstream --force-with-lease
+          done
