@@ -25,10 +25,10 @@ jobs:
 
       - name: Sync all branches
         run: |
-          for branch in $(git for-each-ref --format='%(refname:short)' refs/remotes/upstream/ | sed 's|^upstream/||' | grep -v -E '^(HEAD|)$'); do
+          for branch in $(git for-each-ref --format='%(refname:short)' refs/remotes/upstream/ | grep -E '^upstream/' | sed 's|^upstream/||'); do
             echo "Processing branch: $branch"
           
-            # Skip branches with workflow files
+            # Skip workflow branches
             if git ls-tree -r upstream/$branch | grep -q '.github/workflows/'; then
               echo "Skipping $branch because it contains workflows"
               continue
@@ -42,6 +42,7 @@ jobs:
               git push -u origin $branch --force-with-lease
             fi
           done
+
 
 
 
