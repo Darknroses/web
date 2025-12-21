@@ -25,7 +25,7 @@ jobs:
 
       - name: Sync all branches
         run: |
-          for branch in $(git for-each-ref --format='%(refname:short)' refs/remotes/upstream/ | grep -v HEAD); do
+          for branch in $(git for-each-ref --format='%(refname:short)' refs/remotes/upstream/ | sed 's|^upstream/||' | grep -v HEAD); do
             echo "Processing branch: $branch"
           
             # Skip branches with workflow files
@@ -42,6 +42,7 @@ jobs:
               git push -u origin $branch --force-with-lease
             fi
           done
+
 
       - name: Push changes
         run: git push origin --all --force-with-lease
