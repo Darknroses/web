@@ -2,7 +2,6 @@ name: Sync fork with upstream
 
 permissions:
   contents: write
-  workflows: write
 
 on:
   schedule:
