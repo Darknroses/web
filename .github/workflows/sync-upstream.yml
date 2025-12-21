@@ -28,36 +28,37 @@ jobs:
         run: |
           # If triggered by dispatch, use input. If by schedule, use default.
           UPSTREAM_REPO="${{ github.event.inputs.upstream_repo }}"
-          if [ -z "$UPSTREAM_REPO" ]; then
-            UPSTREAM_REPO="OCA/web"
-          fi
           echo "UPSTREAM_REPO=$UPSTREAM_REPO" >> $GITHUB_ENV
 
       - name: Sync all branches
         run: |
-          # Configure Git Identity
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-
-          # Add upstream
+          
           git remote add upstream https://github.com/${{ env.UPSTREAM_REPO }}.git
           git fetch upstream --prune '+refs/heads/*:refs/remotes/upstream/*'
-
+          
           SKIP_BRANCHES="11.0 12.0 13.0 14.0 15.0 16.0 17.0 18.0"
-
+          FAILED_BRANCHES=""
+          
           for branch in $(git for-each-ref --format='%(refname:short)' refs/remotes/upstream/ | sed 's|^upstream/||'); do
-            # Skip if branch is in the skip list
             if echo "$SKIP_BRANCHES" | grep -wq "$branch"; then
-              echo "Skipping old workflow branch: $branch"
+              echo ">>> Skipping old branch: $branch"
               continue
             fi
-
-            echo "Processing branch: $branch"
-            
-            # Checkout the branch (create it if it doesn't exist locally)
+          
+            echo ">>> Syncing branch: $branch"
             git checkout -B "$branch" "upstream/$branch"
-
-            # Push to origin (your fork)
-            # Since we used the PAT in the checkout step, we don't need to embed it in the URL
-            git push origin "$branch" --force-with-lease
+          
+            # Push and capture failure if it happens
+            if ! git push origin "$branch" --force-with-lease; then
+              echo "::error:: Failed to push $branch"
+              FAILED_BRANCHES="$FAILED_BRANCHES $branch"
+            fi
           done
+          
+          # If any branch failed, make the job fail at the very end
+          if [ -n "$FAILED_BRANCHES" ]; then
+            echo "The following branches failed to sync: $FAILED_BRANCHES"
+            exit 1
+          fi
