@@ -46,6 +46,8 @@ jobs:
 
 
       - name: Push changes
+        env:
+          PAT_TOKEN: ${{ secrets.PAT_TOKEN }}
         run: |
           for branch in $(git branch | sed 's/\* //'); do
             echo "Pushing branch $branch"
