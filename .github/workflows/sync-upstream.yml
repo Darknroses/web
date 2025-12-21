@@ -28,6 +28,12 @@ jobs:
           for branch in $(git branch -r | grep upstream/ | grep -v HEAD | sed 's|upstream/||'); do
             echo "Processing branch: $branch"
 
+            # Skip branches with workflow files
+            if git ls-tree -r upstream/$branch | grep -q '.github/workflows/'; then
+              echo "Skipping $branch because it contains workflows"
+              continue
+            fi
+
             if git show-ref --verify --quiet refs/heads/$branch; then
               git checkout $branch
               git merge --ff-only upstream/$branch || true
@@ -37,4 +43,4 @@ jobs:
           done
 
       - name: Push changes
-        run: git push origin --all
+        run: git push origin --all --force-with-lease
